@@ -31,22 +31,26 @@
                 </tr>
             {% endfor %}
         </tr>
-            <!-- {% if leads %}
-                {% for lead in leads %}
+    </table>
+    <br><br>
+    {% if followup %}
+        <table style="border:2px solid black">
+            <tr>
+                {% for lead in followup %}
+                    {% if forloop.first %}
+                        {% for header in lead.keys %}
+                            <th>{{ header }}</th>
+                        {% endfor %}
+                    {% endif %}
                     <tr>
-                        <td>{{ lead.creation_time }}</td>
-                        <td>{{ lead.source }}</td>
-                        <td>{{ lead.contact_person }}</td>
-                        <td>{{ lead.name }}</td>
-                        <td>{{ lead.phone_number }}</td>
-                        <td>{{ lead.address }}</td>
-                        <td>{{ lead.current_stage }}</td>
+                        {% for value in lead.values %}
+                            <td>{{ value }}</td>
+                        {% endfor %}
                     </tr>
                 {% endfor %}
-            {% else %}
-            <p>No leads available.</p>
-            {% endif %} -->
-    </table>
+            </tr>
+        </table>
+    {% endif %}
 </body>
 
 </html>

@@ -25,7 +25,4 @@ class FollowUp(models.Model):
     comment = models.CharField(max_length=500)
     medium_used = models.CharField(max_length=10, choices=medium_used, default='call')
     date_followed = models.DateTimeField('date followed')
-
-    def __str__(self):
-        return self.comment
     
