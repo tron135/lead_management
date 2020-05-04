@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form method="POST" action="/leads/">
+        {% csrf_token %}
+        <br><br>
+        <label for="from">From:</label>
+        <input id="from" name="from" type="date">
+        <br><br>
+        <label for="to">To:</label>
+        <input id="to" name="to" type="date">
+        <br><br>
+        <select name="dropdown" multiple>
+            <option value="source">Source</option>
+            <option value="contact_person">Contact Person</option>
+            <option value="name">Name</option>
+            <option value="phone_number">Phone Number</option>
+            <option value="address">Address</option>
+            <option value="current_stage">Current Status</option>
+        </select>
+        <br><br>
+        <button type="submit" name="submit" value="submit">Submit</button>
+    </form>
+</body>
+
+</html>

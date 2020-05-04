@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leads</title>
+    <style>
+        th, td{
+            border: 2px solid black;
+        }
+        td{
+            padding: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <table style="border:2px solid black">
+        <tr>
+            {% for lead in leads %}
+                {% if forloop.first %}
+                    {% for header in lead.keys %}
+                        <th>{{ header }}</th>
+                    {% endfor %}
+                {% endif %}
+                <tr>
+                    {% for value in lead.values %}
+                        <td>{{ value }}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </tr>
+            <!-- {% if leads %}
+                {% for lead in leads %}
+                    <tr>
+                        <td>{{ lead.creation_time }}</td>
+                        <td>{{ lead.source }}</td>
+                        <td>{{ lead.contact_person }}</td>
+                        <td>{{ lead.name }}</td>
+                        <td>{{ lead.phone_number }}</td>
+                        <td>{{ lead.address }}</td>
+                        <td>{{ lead.current_stage }}</td>
+                    </tr>
+                {% endfor %}
+            {% else %}
+            <p>No leads available.</p>
+            {% endif %} -->
+    </table>
+</body>
+
+</html>
