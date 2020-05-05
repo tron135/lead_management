@@ -10,23 +10,21 @@ def lead(request):
     if request.POST:
         fromDate = request.POST.get('from')
         toDate = request.POST.get('to')
-        system = request.POST.getlist('dropdown')
+        system = ['id'] + request.POST.getlist('dropdown')
+        print(system)
+        if 'followup' in system:
+            system.remove('followup')
 
         filtered = Lead.objects.filter(creation_time__range=(fromDate, toDate))
         leads = filtered.values(*system)
 
         if 'followup' in request.POST.getlist('dropdown'):
-            names = filtered.values('name').values_list('id')
-            out = [item for t in names for item in t]
-            print(out)
+            # names = filtered.values('name').values_list('id', flat=True)
+            for lead in leads:
+                names = FollowUp.objects.filter(lead_name_id=lead['id']).values()
+                lead['followup'] = list(names)
+        print(leads)
 
-            if len(names) != 0:
-                followup = FollowUp.objects.filter(lead_name_id__in=out).order_by('lead_name').values()
-            else:    
-                followup = FollowUp.objects.all().order_by('lead_name').values()
-        else:
-            followup = {}
-
-    context = {'leads':leads, 'followup':followup}
+    context = {'leads':leads, 'lof': len(system)}
 
     return render(request, 'lead/lead.htm', context)

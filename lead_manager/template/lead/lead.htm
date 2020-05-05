@@ -26,31 +26,30 @@
                 {% endif %}
                 <tr>
                     {% for value in lead.values %}
-                        <td>{{ value }}</td>
+                        {% if 'followup' in lead.keys %}
+                            {% if forloop.last %}
+                                <td>
+                                    <table>
+                                        {% for val in value %}
+                                            <tr>
+                                                <td>{{ val.comment }}</td>
+                                                <td>{{ val.medium_used }}</td>
+                                                <td>{{ val.date_followed }}</td>
+                                            </tr>  
+                                        {% endfor %}
+                                    </table>
+                                </td>
+                            {% else %}
+                                <td>{{ value }}</td>
+                            {% endif %}
+                        {% else %}
+                            <td>{{ value }}</td>
+                        {% endif %}
                     {% endfor %}
                 </tr>
             {% endfor %}
         </tr>
     </table>
-    <br><br>
-    {% if followup %}
-        <table style="border:2px solid black">
-            <tr>
-                {% for lead in followup %}
-                    {% if forloop.first %}
-                        {% for header in lead.keys %}
-                            <th>{{ header }}</th>
-                        {% endfor %}
-                    {% endif %}
-                    <tr>
-                        {% for value in lead.values %}
-                            <td>{{ value }}</td>
-                        {% endfor %}
-                    </tr>
-                {% endfor %}
-            </tr>
-        </table>
-    {% endif %}
 </body>
 
 </html>
